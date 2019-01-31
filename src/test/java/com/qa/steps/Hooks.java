@@ -33,12 +33,6 @@ public class Hooks extends DriverManager {
     @Before()
     public void setUpDriver(Scenario scenario) {
         test=createTest(getExtentReports(), "Scenario : "+scenario.getName());
-/*
-        extentTest=test;
-*/
-/*
-        setLogStatus(extentTest, "Info", "Running Scenario : "+scenario.getName());
-*/
         logger.info("Scenario is running: "+scenario.getName());
         BasicConfigurator.configure();
         //setDriver();

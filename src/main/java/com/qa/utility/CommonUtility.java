@@ -40,6 +40,11 @@ public class CommonUtility {
         FluentWait<WebDriver> wait = fluentWait(driver);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+    public static void waitForStalenessVisibilityOfElement(WebDriver driver,WebElement element){
+        FluentWait<WebDriver> wait = fluentWait(driver);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.stalenessOf(element)));
+    }
+
     public static FluentWait<WebDriver> fluentWait(WebDriver driver){
         return fluentWait(driver,DEFAULT_WAIT_TIME, TimeUnit.SECONDS);
     }

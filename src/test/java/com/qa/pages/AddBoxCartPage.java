@@ -3,6 +3,7 @@ package com.qa.pages;
 import com.aventstack.extentreports.ExtentTest;
 import com.qa.driver.DriverManager;
 import com.qa.steps.AddBoxCartSteps;
+import gherkin.lexer.Th;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -381,7 +382,7 @@ public class AddBoxCartPage extends DriverManager {
         yesRemoveButtonLayout.click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //Verify Cart
-        hoverAction(driver,emptyCartHomePage);
+        waitForVisibilityOfElement(driver,emptyCartHomePage);
        // waitForVisibilityOfElement(driver,emptyCartHomePage);
         logger.info("EmptyCart message: "+emptyCartHomePage.getText());
         boolean flag=emptyCartHomePage.getText().toUpperCase().trim().contains("Vous n'avez pas de produit dans votre panier".toUpperCase().trim());
@@ -429,13 +430,25 @@ public class AddBoxCartPage extends DriverManager {
         List<Boolean> myFinalList = new ArrayList<>();
         for (int i = 0; i <= listImages.size() - 1; i++) {
             WebElement item = driver.findElement(By.xpath("(//*[@class='thematic__wrapper-link'])[" + (i + 1) + "]"));
+            try{
+                Thread.sleep(4000);
+            }catch(Exception e){
+
+            }
             waitForVisibilityOfElement(driver,item);
+          //  waitForStalenessVisibilityOfElement(driver,item);
             myFinalList.add(item.getAttribute("data-product-id") != null || !item.getAttribute("data-product-id").equalsIgnoreCase(" "));
         }
         for (int i = 0; i <= listImages.size() - 1; i++) {
             WebElement elemnt = driver.findElement(By.xpath("(//*[@class='thematic__wrapper-link'])[" + (i + 1) + "]"));
             //Highlight and Scroll into View
+            try{
+                Thread.sleep(4000);
+            }catch(Exception e){
+
+            }
             waitForVisibilityOfElement(driver,elemnt);
+            //waitForStalenessVisibilityOfElement(driver,elemnt);
             Boolean productID = elemnt.getAttribute("data-product-id") != null
                     && !elemnt.getAttribute("data-product-id").equalsIgnoreCase("");
             setLogStatus(test, "Info", "Product ID under check is : "+elemnt.getAttribute("data-product-id"));
